@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Definition of the root element -->
+    <xs:element name="LifeLinkData">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="User" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <!-- User ID must be a string -->
+                            <xs:element name="UserID" type="xs:string"/>
+                            
+                            <!-- Full Name -->
+                            <xs:element name="Name" type="xs:string"/>
+                            
+                            <!-- Age must be a positive integer -->
+                            <xs:element name="Age" type="xs:positiveInteger"/>
+                            
+                            <!-- Heart rate in bpm -->
+                            <xs:element name="HeartRate" type="xs:positiveInteger"/>
+                            
+                            <!-- SpO2 percentage (0 to 100) -->
+                            <xs:element name="OxygenLevel">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:integer">
+                                        <xs:minInclusive value="0"/>
+                                        <xs:maxInclusive value="100"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            
+                            <!-- Blood Pressure containing Systolic and Diastolic -->
+                            <xs:element name="BloodPressure">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Systolic" type="xs:positiveInteger"/>
+                                        <xs:element name="Diastolic" type="xs:positiveInteger"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            
+                            <!-- Temperature in Fahrenheit or Celsius (decimal) -->
+                            <xs:element name="Temperature" type="xs:decimal"/>
+                            
+                            <!-- Standardized dateTime format -->
+                            <xs:element name="Timestamp" type="xs:dateTime"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

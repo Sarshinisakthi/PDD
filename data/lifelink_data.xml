@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  LifeLink - Smart Health Monitoring System
+  XML Document representing real-time health data for registered users.
+  This document is validated against lifelink_schema.xsd
+-->
+<LifeLinkData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="lifelink_schema.xsd">
+    
+    <!-- User 1: Healthy vitals -->
+    <User>
+        <UserID>USR-1001</UserID>
+        <Name>Umadevi</Name>
+        <Age>28</Age>
+        <HeartRate>72</HeartRate>
+        <OxygenLevel>98</OxygenLevel>
+        <BloodPressure>
+            <Systolic>118</Systolic>
+            <Diastolic>78</Diastolic>
+        </BloodPressure>
+        <Temperature>98.6</Temperature>
+        <Timestamp>2026-06-17T21:45:00Z</Timestamp>
+    </User>
+
+    <!-- User 2: Slightly elevated heart rate -->
+    <User>
+        <UserID>USR-1002</UserID>
+        <Name>Rahul Sharma</Name>
+        <Age>45</Age>
+        <HeartRate>95</HeartRate>
+        <OxygenLevel>96</OxygenLevel>
+        <BloodPressure>
+            <Systolic>130</Systolic>
+            <Diastolic>85</Diastolic>
+        </BloodPressure>
+        <Temperature>99.1</Temperature>
+        <Timestamp>2026-06-17T21:46:15Z</Timestamp>
+    </User>
+
+    <!-- User 3: Low oxygen alert -->
+    <User>
+        <UserID>USR-1003</UserID>
+        <Name>Priya Patel</Name>
+        <Age>62</Age>
+        <HeartRate>88</HeartRate>
+        <OxygenLevel>93</OxygenLevel>
+        <BloodPressure>
+            <Systolic>145</Systolic>
+            <Diastolic>90</Diastolic>
+        </BloodPressure>
+        <Temperature>98.2</Temperature>
+        <Timestamp>2026-06-17T21:48:30Z</Timestamp>
+    </User>
+
+</LifeLinkData>
