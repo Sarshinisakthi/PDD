@@ -1,0 +1,35 @@
+{
+    "name": "backend-v2",
+    "version": "1.0.0",
+    "description": "",
+    "main": "dist/server.js",
+    "scripts": {
+        "test": "jest",
+        "build": "tsc",
+        "dev": "nodemon --exec ts-node src/server.ts",
+        "start": "node dist/server.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "commonjs",
+    "dependencies": {
+        "@supabase/supabase-js": "^2.108.1",
+        "cors": "^2.8.6",
+        "dotenv": "^17.4.2",
+        "express": "^5.2.1",
+        "firebase-admin": "^14.0.0",
+        "groq-sdk": "^1.2.1",
+        "openai": "^6.42.0",
+        "pdfkit": "^0.19.1"
+    },
+    "devDependencies": {
+        "@types/cors": "^2.8.19",
+        "@types/express": "^5.0.6",
+        "@types/node": "^25.9.3",
+        "@types/pdfkit": "^0.17.6",
+        "nodemon": "^3.1.14",
+        "ts-node": "^10.9.2",
+        "typescript": "^6.0.3"
+    }
+}
