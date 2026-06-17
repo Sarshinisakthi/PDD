@@ -1,0 +1,41 @@
+Test Case ID,Type,Title,Steps,Expected Result,Actual Result,Status,Notes
+TC-SEL-01,Selenium,Valid User Login,"1. Navigate to login page 2. Enter valid email 3. Enter valid password 4. Click Login","User is redirected to Dashboard and sees welcome message.","User redirected to Dashboard.",PASS,
+TC-SEL-02,Selenium,Invalid Login - Wrong Password,"1. Navigate to login 2. Enter valid email 3. Enter wrong password 4. Click Login","Error message ""Invalid credentials"" is displayed.","Error message displayed correctly.",PASS,
+TC-SEL-03,Selenium,Registration - Valid Data,"1. Go to Register page 2. Fill all fields (Name, Email, Password, Age, Blood Group) 3. Click Sign Up","Account created, redirected to Dashboard.","Account created and redirected.",PASS,
+TC-SEL-04,Selenium,Registration - Missing Mandatory Fields,"1. Go to Register 2. Leave Email blank 3. Click Sign Up","HTML5 validation prevents submission.","Form prevented from submitting.",PASS,
+TC-SEL-05,Selenium,Registration - Existing Email,"1. Go to Register 2. Enter email already in DB 3. Click Sign Up","Error message ""User already exists"" is shown.","Error message displayed.",PASS,
+TC-SEL-06,Selenium,Dashboard - Heart Rate Display,"1. Login 2. View Dashboard Vital Cards","Heart Rate card shows numeric value between 60-100 bpm.","Heart Rate shows 72 bpm.",PASS,
+TC-SEL-07,Selenium,Dashboard - SpO2 Display,"1. Login 2. View Dashboard Vital Cards","Oxygen level shows value between 90-100%.","SpO2 shows 98%.",PASS,
+TC-SEL-08,Selenium,Dashboard - Blood Pressure Display,"1. Login 2. View Dashboard Vital Cards","BP card shows format XXX/XX mmHg.","BP shows 118/78 mmHg.",PASS,
+TC-SEL-09,Selenium,Dashboard - Temperature Display,"1. Login 2. View Dashboard Vital Cards","Temperature shows value around 98.6 F.","Temperature shows 98.6 F.",PASS,
+TC-SEL-10,Selenium,Navigation - Sidebar Links,"1. Login 2. Click ""Health Details"" in sidebar","URL changes to /health, page renders Advanced Analytics.","Redirected to /health successfully.",PASS,
+TC-SEL-11,Selenium,Navigation - Profile Page,"1. Click ""Profile"" in sidebar","Profile page loads user details.","Profile page loaded.",PASS,
+TC-SEL-12,Selenium,Profile - Edit Age,"1. Go to Profile 2. Click Edit 3. Update Age to 30 4. Click Save","Age updates to 30 successfully.","Age updated to 30.",PASS,
+TC-SEL-13,Selenium,Settings - Toggle Dark Mode,"1. Go to Settings 2. Click Dark Mode toggle","Toggle switches to active state.","Toggle switched to active.",PASS,
+TC-SEL-14,Selenium,Settings - Language Selection,"1. Go to Settings 2. Select ""Spanish"" from dropdown","Dropdown value changes to Spanish.","Value changed successfully.",PASS,
+TC-SEL-15,Selenium,Logout Functionality,"1. Click ""Logout"" button in sidebar","JWT token is cleared, redirected to Login.","Token cleared, user on Login screen.",PASS,
+TC-APP-01,Appium,App Launch,"1. Tap App Icon 2. Wait for Splash Screen","Splash screen shows LifeLink logo and transitions to Login.","Transitioned to Login screen.",PASS,
+TC-APP-02,Appium,Mobile Login,"1. Enter email 2. Enter password 3. Tap Login","Dashboard screen loads.","Dashboard screen loaded.",PASS,
+TC-APP-03,Appium,API Data Loading - Vitals,"1. Login 2. Wait for API fetch","Heart Rate, SpO2, and BP display values within 3 seconds.","Values displayed in 1.2s.",PASS,
+TC-APP-04,Appium,Bottom Navigation - Switch to Alerts,"1. Tap ""Alerts"" tab in bottom navigation","Alerts screen is displayed.","Alerts screen rendered.",PASS,
+TC-APP-05,Appium,Bottom Navigation - Switch to Profile,"1. Tap ""Profile"" tab","Profile screen displays user avatar.","Profile screen displayed.",PASS,
+TC-APP-06,Appium,Pull to Refresh,"1. Go to Dashboard 2. Swipe down on scroll view","Refresh indicator spins, new data is fetched.","Refresh indicator spun, data updated.",PASS,
+TC-APP-07,Appium,Button Action - Book Doctor,"1. Go to Doctors tab 2. Tap ""Book Appointment"" on first doctor","Booking modal/screen opens.","Booking modal opened.",PASS,
+TC-APP-08,Appium,Push Notification Trigger,"1. Trigger low SpO2 via mock backend 2. Wait for notification","System push notification ""Critical: Low Oxygen detected"" appears.","Notification appeared in tray.",PASS,
+TC-APP-09,Appium,Tap Push Notification,"1. Tap the received push notification in tray","App opens and navigates directly to Alerts screen.","App opened but stuck on Dashboard instead of Alerts screen.",FAIL,"Reason: Deep link handler misconfigured from background tap"
+TC-APP-10,Appium,UI Responsiveness - Portrait to Landscape,"1. Rotate device to Landscape 2. Check layout","Vitals grid adjusts from 2 columns to 4 columns.","Grid adjusted perfectly.",PASS,
+TC-APP-11,Appium,Device Connection - Bluetooth Scan,"1. Go to Device Connection 2. Tap ""Scan for Devices""","Loading spinner appears, mock device found.","Device ""LifeLink Band"" found.",PASS,
+TC-APP-12,Appium,Offline Mode Behavior,"1. Disable device Wi-Fi/Data 2. Open App","""No Internet Connection"" toast appears. Cached data shown.","Toast appeared, cached data rendered.",PASS,
+TC-APP-13,Appium,Settings - Toggle Push Notifications,"1. Go to Settings 2. Toggle push notifications off","Switch state changes to false, API request sent.","Switch toggled, API updated.",PASS,
+TC-APP-14,Appium,Form Input - Hide Keyboard,"1. Focus on Profile Name input 2. Tap outside input","Mobile keyboard dismisses automatically.","Keyboard dismissed.",PASS,
+TC-APP-15,Appium,Mobile Logout,"1. Go to Profile 2. Scroll to bottom 3. Tap Logout","Token cleared from SecureStore, routed to Login.","Routed to Login successfully.",PASS,
+TC-SEC-01,Security,SQL Injection (SQLi) - Login Form,"1. Enter email: admin@test.com' OR '1'='1 2. Submit","System rejects input, no unauthorized access.","Rejected. ORM parameterizes queries.",PASS,"Risk: High"
+TC-SEC-02,Security,Cross-Site Scripting (XSS) - Profile Update,"1. Update Profile Name to <script>alert('XSS')</script>","Script is sanitized and rendered as raw text, no alert pops up.","Rendered as raw text by React DOM.",PASS,"Risk: High"
+TC-SEC-03,Security,Broken Authentication - No JWT Token,"1. Send GET request to /api/health without Bearer token.","API returns 401 Unauthorized.","Returned 401.",PASS,"Risk: High"
+TC-SEC-04,Security,Broken Authentication - Expired JWT,"1. Send request using an expired JWT token.","API returns 401 Unauthorized or 403 Forbidden.","Returned 401 (Token Expired).",PASS,"Risk: Medium"
+TC-SEC-05,Security,Broken Access Control (IDOR),"1. User A logs in. 2. User A requests /api/health?userId=<User_B_ID>","API rejects request unless User A is an Admin/Doctor.","Rejected. Controller validates req.user._id.",PASS,"Risk: High"
+TC-SEC-06,Security,Rate Limiting (Brute Force Protection),"1. Send 50 login requests in 5 seconds.","IP is temporarily blocked, 429 Too Many Requests returned.","429 returned after 10 requests.",PASS,"Risk: Medium"
+TC-SEC-07,Security,Data Exposure in Transit,"1. Intercept network traffic using Wireshark/BurpSuite.","All traffic is encrypted via HTTPS/TLS 1.2+.","Encrypted. No plain text exposed.",PASS,"Risk: High"
+TC-SEC-08,Security,Sensitive Data Exposure - Password Hashing,"1. Inspect backend database directly.","Passwords are hashed using bcrypt, not stored in plaintext.","Passwords are hashed.",PASS,"Risk: High"
+TC-SEC-09,Security,Cross-Site Request Forgery (CSRF),"1. Attempt state-changing POST request from an external unauthorized origin.","CORS policy blocks request / Token prevents action.","Blocked by CORS.",PASS,"Risk: Medium"
+TC-SEC-10,Security,Security Misconfiguration - Exposing Errors,"1. Intentionally trigger a 500 internal server error.","Generic error returned to client. No stack traces exposed.","Generic message returned in production mode.",PASS,"Risk: Low"
